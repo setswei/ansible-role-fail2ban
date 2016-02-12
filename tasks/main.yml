@@ -8,7 +8,7 @@
     - fail2ban
 
 - name: Install packages for Debian derivatives
-  apt: >
+  apt:
     pkg={{ item }}
     update_cache=yes
     state=latest
@@ -19,7 +19,7 @@
     - fail2ban
 
 - name: Write fail2ban configuration template
-  template: >
+  template:
     src={{ item.src }}
     dest={{ item.dest }}
     mode=0644 owner=root group=root
@@ -27,6 +27,8 @@
     - { src: 'jail-local.j2',          dest: '{{ fail2ban_config_dir }}/jail.local' }
     - { src: 'sendmail-conf.j2',       dest: '{{ fail2ban_config_dir }}/action.d/sendmail.conf' }
     - { src: 'sendmail-whois-conf.j2', dest: '{{ fail2ban_config_dir }}/action.d/sendmail-whois.conf' }
+    - { src: 'portscan-conf.j2',       dest: '{{ fail2ban_config_dir }}/filter.d/portscan.conf' }
+    - { src: 'ufw-conf.j2',            dest: '{{ fail2ban_config_dir }}/action.d/ufw.conf' }
   notify:
     - restart fail2ban
   tags:
@@ -34,7 +36,7 @@
     - fail2ban
 
 - name: Start fail2ban on server boot
-  service: >
+  service:
     name={{ fail2ban_service }}
     state=started
     enabled=yes

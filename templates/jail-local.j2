@@ -18,13 +18,13 @@ port      = {{ fail2ban_sshport }}
 [ssh-ddos]
 enabled   = true
 
-{% if fail2ban_postfix %}
+{% if fail2ban_postfix is sameas true %}
 [postfix]
 enabled   = true
 maxretry  = 1
 {% endif %}
 
-{% if fail2ban_portscan %}
+{% if fail2ban_portscan is sameas true %}
 [portscan]
 enabled  = true
 filter   = portscan
