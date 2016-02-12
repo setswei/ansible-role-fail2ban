@@ -1,4 +1,5 @@
 # Ansible-role-fail2ban
+[![Build Status](https://travis-ci.org/setswei/ansible-role-fail2ban.svg?branch=master)](https://travis-ci.org/setswei/ansible-role-fail2ban) ![Build Status](http://bamboo.cybercrysis.net.au/plugins/servlet/wittified/build-status/SVR-ANF2B)
 
 This role installs [fail2ban](http://www.fail2ban.org/) which is a service that
 scans log files (e.g. /var/log/apache/error_log) and bans IPs that show malicious

@@ -1,0 +1,9 @@
+---
+- hosts: all
+
+  vars:
+    fail2ban_postfix: false
+    fail2ban_portscan: true
+
+  roles:
+    - ansible-role-fail2ban
