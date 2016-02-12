@@ -40,7 +40,7 @@ script:
 
   # Check to see if fail2ban service is running
   - >
-    sudo docker exec --tty "$(cat ${bamboo.docker.temp})" env TERM=xterm service fail2ban status
+    sudo docker exec --tty "$(cat $${container_id})" env TERM=xterm service fail2ban status
     | grep -q  '*  fail2ban is running'
     && (echo 'Service Running: pass' && exit 0)
     || (echo 'Service Running: fail' && exit 1)
