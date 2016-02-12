@@ -18,6 +18,17 @@ port      = {{ fail2ban_sshport }}
 [ssh-ddos]
 enabled   = true
 
+{% if fail2ban_postfix %}
 [postfix]
 enabled   = true
 maxretry  = 1
+{% endif %}
+
+{% if fail2ban_portscan %}
+[portscan]
+enabled  = true
+filter   = portscan
+logpath  = /var/log/ufw.log
+action   = ufw
+maxretry = 5
+{% endif %}

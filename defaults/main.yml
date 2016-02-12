@@ -10,3 +10,5 @@ fail2ban_banaction: 'iptables-multiport'
 fail2ban_action: '%(action_mwl)s'
 fail2ban_destemail: 'root@localhost'
 fail2ban_sshport: 22
+fail2ban_potfix:
+fail2ban_portscan:
