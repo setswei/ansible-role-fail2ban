@@ -1,4 +1,4 @@
-# Fail2ban Role for Ansible
+# Ansible-role-fail2ban
 
 This role installs [fail2ban](http://www.fail2ban.org/) which is a service that
 scans log files (e.g. /var/log/apache/error_log) and bans IPs that show malicious
@@ -36,6 +36,13 @@ fail2ban_destemail: 'root@localhost'
 
 # The default port for monitoring SSH service
 fail2ban_sshport: 22
+
+# Set this variable to true to enable porscan filtering
+# Please note currently this requires ufw
+fail2ban_portscan: true
+
+# Set this this variable to enable postfix monitoring
+fail2ban_postfix: true
 ```
 
 ## Examples
@@ -69,7 +76,11 @@ fail2ban_sshport: 22
 
 ## Dependencies
 
-None.
+None, except if you using the port filtering section i would recommend using a ufw playbook
+
+## Author Information
+
+Created by [Pete McWilliams](https://github.com/petemcw), Refactored by [Kyle Hartigan](https://github.com/setswei)
 
 ## License
 
