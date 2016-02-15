@@ -13,4 +13,4 @@ fail2ban_sshport: 22
 
 # Set these varialbes to true or false
 fail2ban_potfix: false
-fail2ban_portscan: true
+fail2ban_portscan: false
