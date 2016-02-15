@@ -21,7 +21,7 @@ before_install:
   - 'sudo docker build --rm=true --file=tests/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible tests'
 
 script:
-  - 'container_id=$(mktemp)'
+  - container_id=$(mktemp)
     # Run container in detached state
   - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/ansible-role-fail2ban:ro ${run_opts} ${distribution}-${version}:ansible "${init}" > "${container_id}"'
 
@@ -33,17 +33,17 @@ script:
 
   # Test role idempotence.
   - >
-    sudo docker exec --tty "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/ansible-role-fail2ban/tests/test-install-package.yml
+    sudo docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/ansible-role-fail2ban/tests/test-install-package.yml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # Check to see if fail2ban service is running
-   - >
-    sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm service fail2ban status
-    | grep -q  '*  fail2ban is running'
-    && (echo 'Service Running: pass' && exit 0)
-    || (echo 'Service Running: fail' && exit 1)
+  # Check to See if sabnzbd is running
+  - >
+    sudo docker exec "$(cat ${container_id})" env TERM=xterm service sabnzbdplus status
+    | grep -q '*  fail2ban is running'
+    && (echo 'fail2ban is running' && exit 0)
+    || (echo 'fail2ban is not running' && exit 1)
 
   # Clean up
   - 'sudo docker stop "$(cat ${container_id})"'
