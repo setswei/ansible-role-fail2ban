@@ -5,10 +5,10 @@ env:
     version: 14.04
     init: /sbin/init
     run_opts: ""
-#  - distribution: ubuntu
-#    version: 12.04
-#    init: /sbin/init
-#    run_opts: ""
+  - distribution: ubuntu
+    version: 12.04
+    init: /sbin/init
+    run_opts: ""
 
 services:
   - docker
@@ -39,7 +39,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Check to see if fail2ban service is running
-  - >
+   - >
     sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm service fail2ban status
     | grep -q  '*  fail2ban is running'
     && (echo 'Service Running: pass' && exit 0)
