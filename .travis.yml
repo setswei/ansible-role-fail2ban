@@ -38,12 +38,12 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-  # Check to see if fail2ban service is running
+  # Check to See if fail2ban is running
   - >
-    sudo docker exec --tty "$(cat ${bamboo.docker.temp})" env TERM=xterm service fail2ban status
-    | grep -q  '*  fail2ban is running'
-    && (echo 'Service Running: pass' && exit 0)
-    || (echo 'Service Running: fail' && exit 1)
+    sudo docker exec "$(cat ${container_id})" env TERM=xterm service fail2ban status
+    | grep -q '*  fail2ban is running'
+    && (echo 'fail2ban is running' && exit 0)
+    || (echo 'fail2ban is not running' && exit 1)
 
   # Clean up
   - 'sudo docker stop "$(cat ${container_id})"'
